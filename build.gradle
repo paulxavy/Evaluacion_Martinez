@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+repositories {
+    mavenCentral()
+}
+ext {
+    helidonversion = '3.0.2'
+}
+dependencies {
+    implementation platform("io.helidon:helidon-dependencies:${project.helidonversion}")
+
+    implementation 'io.helidon.microprofile.server:helidon-microprofile-server'
+
+    implementation 'org.glassfish.jersey.media:jersey-media-json-binding'
+
+    runtimeOnly 'org.jboss:jandex'
+    // lombok con gradle sin plugin
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+    // https://mvnrepository.com/artifact/org.jdbi/jdbi3-postgres
+    implementation 'org.jdbi:jdbi3-core:3.36.0'
+    implementation 'com.zaxxer:HikariCP:5.0.1'
+    // https://mvnrepository.com/artifact/org.postgresql/postgresql
+    implementation 'org.postgresql:postgresql:42.5.1'
+
+
+
+}
+sourceSets{
+    main{
+        output.resourcesDir = file("${buildDir}/classes/java/main")
+    }
+}
